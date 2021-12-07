@@ -24,7 +24,7 @@ else
     $file_out = file($filepath_coord);
     $line = $file_out[count($file_out)-1];
     $numbers = explode(', ', $line);
-    if(count($numbers) < 2)
+    if(!$numbers)
     {
         die("Данных нет");
     }
