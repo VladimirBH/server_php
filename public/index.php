@@ -1,25 +1,29 @@
 <?php
-$filepath_ip = '../static/ip_cli.txt';
-$filepath_coord = '../static/car_coord.txt';
-
-$ip_client = $_SERVER['HTTP_HOST'];
-if(filesize($filepath_ip) == 0 || filectime($filepath_ip))
+if(isset($GET_["x"]) && isset($GET_["y"]))
 {
-    $fp = fopen($filepath_ip, 'w');
-    fputs($fp, $ip_client);
-    fclose($fp);
+
+
 }
 else
 {
-    $fp = fopen($filepath_ip, 'r');
-    if($ip_client != fgets($fp))
+    $filepath_ip = '../static/ip_cli.txt';
+    $filepath_coord = '../static/car_coord.txt';
+
+    $ip_client = $_SERVER['HTTP_HOST'];
+    if(filesize($filepath_ip) == 0 || (strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 30) )
     {
-        fclose($fp);
-        die("UserErrorSecurity");
+        file_put_contents($filepath_ip, $ip_client);
     }
-    fclose($fp);
+    else
+    {
+        $ip_cli_in_file = file_get_contents($filepath_ip);
+        if(strval($ip_client) != strval($ip_cli_in_file))
+        {
+            die("UserErrorSecurity");
+        }
+    }
+    file_put_contents($filepath_coord,  $_GET["x"]. ', '. $_GET["y"] . PHP_EOL , FILE_APPEND);
+
 }
-//$file_in =fopen($filepath_coord, 'w');
-file_put_contents($filepath_coord,  PHP_EOL . $_GET["x"]. ', '. $_GET["y"], FILE_APPEND);
-//fclose($file_in);
+
 ?>
