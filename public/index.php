@@ -4,7 +4,7 @@
 if(isset($_GET["x"]) && isset($_GET["y"]))
 {
     $ip_client = $_SERVER['HTTP_HOST'];
-    if(filesize($filepath_ip) == 0) //(strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 30) )
+    if(count(file($filepath_ip)) <= 1)  //(strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 30) )
     {
         file_put_contents($filepath_ip, $ip_client);
     }
