@@ -6,10 +6,14 @@ if(!(isset($GET_["x"]) && isset($GET_["y"])))
     $file_out = file($filepath_coord);
     $line = $file_out[count($file_out)-1];
     $numbers = explode(', ', $line);
+    if(count($numbers) < 2)
+    {
+        die("Данных нет");
+    }
     echo "x=".$numbers[0]. ", y=".$numbers[1]; 
     if((strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 10))
     {
-        die("Данные не актуальны");
+        die("        Данные не актуальны");
     }
 }
 else
