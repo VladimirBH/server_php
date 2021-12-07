@@ -1,7 +1,7 @@
 <?php
     $filepath_ip = '../static/ip_cli.txt';
     $filepath_coord = '../static/car_coord.txt';
-if(isset($GET_["x"]) && isset($GET_["y"]))
+if($GET_["x"] && $GET_["y"])
 {
     $ip_client = $_SERVER['HTTP_HOST'];
     if(filesize($filepath_ip) == 0) //(strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 30) )
