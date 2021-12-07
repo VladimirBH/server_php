@@ -29,7 +29,7 @@ else
         die("Данных нет");
     }
     echo "x=".$numbers[0]. ", y=".$numbers[1]; 
-    if((strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 10))
+    if((strtotime(date('Y-m-d H:i:s'))-strtotime(filectime($filepath_ip)) > 10000))
     {
         die("        Данные не актуальны");
     }
