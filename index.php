@@ -1,7 +1,7 @@
 <?php
     $filepath_ip = '../static/ip_cli.txt';
     $filepath_coord = '../static/car_coord.txt';
-if(isset($GET_["x"]) && isset($GET_["y"]))
+if(!(isset($GET_["x"]) && isset($GET_["y"])))
 {
     $file_out = file($filepath_coord);
     $line = $file_out[count($file_out)-1];
