@@ -1,0 +1,27 @@
+# Файл docker-compose должен начинаться с указания версии.
+version: '3.1'
+
+# Ниже список наших сервисов (контейнеров). NGINX, PHP, MySQL, phpMyAdmin
+services:
+    nginx:
+        # Какую версию образа nginx из официального хранилища DockerHub используем
+        image: tutum/nginx
+        ports:
+          - "80:80"
+        links:
+          - php-fpm
+        # Монтируем директории, слева директории на основной системе, справа - куда они монтируются в контейнере
+        volumes:
+          - ./nginx/default:/etc/nginx/sites-available/default
+          - ./nginx/default:/etc/nginx/sites-enabled/default
+          - ./logs/nginx-access.log:/var/log/nginx/access.log
+          - ./logs/nginx-error.log:/var/log/nginx/error.log
+
+    php-fpm:
+      image: php:fpm
+      ports:
+        - "9000:9000"
+      volumes:
+        - ./public:/application/public
+          
+
