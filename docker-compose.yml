@@ -23,5 +23,6 @@ services:
         - "9000:9000"
       volumes:
         - ./public:/application/public
+        - ./static:/application/static
           
 
